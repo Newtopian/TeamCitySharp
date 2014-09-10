@@ -7,6 +7,7 @@ namespace TeamCitySharp.ActionTypes
     {
         List<Change> All();
         Change ByChangeId(string id);
+        Change ByVersion(string version);
         Change LastChangeDetailByBuildConfigId(string buildConfigId);
         List<Change> ByBuildConfigId(string buildConfigId);
     }

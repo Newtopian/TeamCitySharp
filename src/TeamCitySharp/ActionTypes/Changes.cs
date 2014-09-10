@@ -28,6 +28,13 @@ namespace TeamCitySharp.ActionTypes
             return change;
         }
 
+        public Change ByVersion(string id)
+        {
+            var change = _caller.GetFormat<Change>("/app/rest/changes/version:{0}", id);
+
+            return change;
+        }
+
         public List<Change> ByBuildConfigId(string buildConfigId)
         {
             var changeWrapper = _caller.GetFormat<ChangeWrapper>("/app/rest/changes?buildType={0}", buildConfigId);

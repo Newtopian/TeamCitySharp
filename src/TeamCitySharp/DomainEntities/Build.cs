@@ -11,12 +11,19 @@ namespace TeamCitySharp.DomainEntities
         public string Href { get; set; }
         public string WebUrl { get; set; }
         public string StatusText { get; set; }
+        
         public DateTime StartDate { get; set; }
         public DateTime FinishDate { get; set; }
+
+        public DateTime QueuedDate { get; set; }
+
+        public Triggered Triggered { get; set; } 
+
 
         public BuildConfig BuildConfig { get; set; }
         public Agent Agent { get; set;}
         public ChangeWrapper Changes { get; set; }
+        public BuildStatistics Statistics { get; set; }
 
         public override string ToString()
         {

@@ -26,6 +26,27 @@ namespace TeamCitySharp.ActionTypes
             return new List<Build>();
         }
 
+        public Build ById(String id)
+        {
+            var build = _caller.GetFormat<Build>("/app/rest/builds/id:{0}", id);
+
+            return build;
+        }
+
+        public BuildStatistics GetStatisticsForBuild(string buildId)
+        {
+            var stats = _caller.GetFormat<BuildStatistics>("/app/rest/builds/id:{0}/statistics", buildId);
+            stats.BuildId = buildId;
+            
+            return stats;
+        }
+        public BuildStatistics GetStatisticsForBuild(Build build)
+        {
+            BuildStatistics stats = GetStatisticsForBuild(build.Id);
+            stats.Href = build.Href + "/statistics";
+            return stats;
+        }
+
         public Build LastBuildByAgent(string agentName)
         {
             return ByBuildLocator(BuildLocator.WithDimensions(

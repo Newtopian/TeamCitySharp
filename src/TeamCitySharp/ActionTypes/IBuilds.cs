@@ -7,6 +7,10 @@ namespace TeamCitySharp.ActionTypes
 {
     public interface IBuilds
     {
+        Build ById(String id);
+        BuildStatistics GetStatisticsForBuild(string buildId);
+        BuildStatistics GetStatisticsForBuild(Build build);
+
         List<Build> SuccessfulBuildsByBuildConfigId(string buildConfigId);
         Build LastSuccessfulBuildByBuildConfigId(string buildConfigId);
         List<Build> FailedBuildsByBuildConfigId(string buildConfigId);
