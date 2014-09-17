@@ -2,14 +2,8 @@
 
 namespace TeamCitySharp.DomainEntities
 {
-    public class Build
+    public class Build : BuildSumary
     {
-        public string Id { get; set; }
-        public string Number { get; set; }
-        public string Status { get; set; }
-        public string BuildTypeId { get; set; }
-        public string Href { get; set; }
-        public string WebUrl { get; set; }
         public string StatusText { get; set; }
         
         public DateTime StartDate { get; set; }
@@ -25,10 +19,22 @@ namespace TeamCitySharp.DomainEntities
         public ChangeWrapper Changes { get; set; }
         public BuildStatistics Statistics { get; set; }
 
+        
+    }
+
+    public class BuildSumary
+    {
+        public string Id { get; set; }
+        public string BuildTypeId { get; set; }
+        public string Number { get; set; }
+        public string Status { get; set; }
+        public string State { get; set; }
+        public string Href { get; set; }
+        public string WebUrl { get; set; }
+
         public override string ToString()
         {
             return Number;
         }
-        
     }
 }

@@ -15,7 +15,7 @@ namespace TeamCitySharp.Connection
                 , new TeamCityDateFilter()), new[] { "application/.*json", "text/.*json" });
 
             var writers = new List<IDataWriter> { jsonWriter };
-            var dataWriterProvider = new RegExBasedDataWriterProvider(new List<IDataWriter> { jsonWriter });
+            var dataWriterProvider = new RegExBasedDataWriterProvider(writers);
             return new DefaultEncoder(dataWriterProvider);
         }
 

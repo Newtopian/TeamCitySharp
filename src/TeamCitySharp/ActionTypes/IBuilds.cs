@@ -9,24 +9,27 @@ namespace TeamCitySharp.ActionTypes
     {
         Build ById(String id);
         BuildStatistics GetStatisticsForBuild(string buildId);
-        BuildStatistics GetStatisticsForBuild(Build build);
+        BuildStatistics GetStatisticsForBuild(BuildSumary build);
+        Build GetDetailedBuild(BuildSumary buildSummary);
 
-        List<Build> SuccessfulBuildsByBuildConfigId(string buildConfigId);
-        Build LastSuccessfulBuildByBuildConfigId(string buildConfigId);
-        List<Build> FailedBuildsByBuildConfigId(string buildConfigId);
-        Build LastFailedBuildByBuildConfigId(string buildConfigId);
-        Build LastBuildByBuildConfigId(string buildConfigId);
-        List<Build> ErrorBuildsByBuildConfigId(string buildConfigId);
-        Build LastErrorBuildByBuildConfigId(string buildConfigId);
-        List<Build> ByBuildConfigId(string buildConfigId);
-        List<Build> ByConfigIdAndTag(string buildConfigId, string tag);
-        List<Build> ByUserName(string userName);
-        List<Build> ByBuildLocator(BuildLocator locator);
-        List<Build> AllSinceDate(DateTime date);
-        List<Build> AllBuildsOfStatusSinceDate(DateTime date, BuildStatus buildStatus);
-        List<Build> NonSuccessfulBuildsForUser(string userName);
-        List<Build> ByBranch(string branchName);
-        Build LastBuildByAgent(string agentName);
         void Add2QueueBuildByBuildConfigId(string buildConfigId);
+
+        List<BuildSumary> AllSinceDate(DateTime date);
+        List<BuildSumary> AllBuildsOfStatusSinceDate(DateTime date, BuildStatus buildStatus);
+        List<BuildSumary> ByBuildLocator(BuildLocator locator);
+        List<BuildSumary> ByConfigIdAndTag(string buildConfigId, string tag);
+        List<BuildSumary> ByBuildConfigId(string buildConfigId);
+        List<BuildSumary> ByUserName(string userName);
+        List<BuildSumary> ByBranch(string branchName);
+        List<BuildSumary> NonSuccessfulBuildsForUser(string userName);
+        List<BuildSumary> SuccessfulBuildsByBuildConfigId(string buildConfigId);
+        List<BuildSumary> FailedBuildsByBuildConfigId(string buildConfigId);
+        List<BuildSumary> ErrorBuildsByBuildConfigId(string buildConfigId);
+        BuildSumary LastBuildByAgent(string agentName);
+        BuildSumary LastSuccessfulBuildByBuildConfigId(string buildConfigId);
+        BuildSumary LastFailedBuildByBuildConfigId(string buildConfigId);
+        BuildSumary LastBuildByBuildConfigId(string buildConfigId);
+        BuildSumary LastErrorBuildByBuildConfigId(string buildConfigId);
+
     }
 }
