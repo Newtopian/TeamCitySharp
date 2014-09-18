@@ -24,6 +24,7 @@
         string StartBackup(string urlPart);
 
         T Get<T>(string urlPart);
+        T GetHRef<T>(string hRef);
 
         void Get(string urlPart);
 

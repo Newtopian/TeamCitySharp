@@ -8,16 +8,16 @@ namespace TeamCitySharp.ActionTypes
 {
     public interface IBuildConfigs
     {
-        List<BuildConfig> All();
-        BuildConfig ByConfigurationName(string buildConfigName);
-        BuildConfig ByConfigurationId(string buildConfigId);
-        BuildConfig ByProjectNameAndConfigurationName(string projectName, string buildConfigName);
-        BuildConfig ByProjectNameAndConfigurationId(string projectName, string buildConfigId);
-        BuildConfig ByProjectIdAndConfigurationName(string projectId, string buildConfigName);
-        BuildConfig ByProjectIdAndConfigurationId(string projectId, string buildConfigId);
-        List<BuildConfig> ByProjectId(string projectId);
-        List<BuildConfig> ByProjectName(string projectName);
-        BuildConfig CreateConfiguration(string projectName, string configurationName);
+        List<BuildType> All();
+        BuildType ByConfigurationName(string buildConfigName);
+        BuildType ByConfigurationId(string buildConfigId);
+        BuildType ByProjectNameAndConfigurationName(string projectName, string buildConfigName);
+        BuildType ByProjectNameAndConfigurationId(string projectName, string buildConfigId);
+        BuildType ByProjectIdAndConfigurationName(string projectId, string buildConfigName);
+        BuildType ByProjectIdAndConfigurationId(string projectId, string buildConfigId);
+        List<BuildType> ByProjectId(string projectId);
+        List<BuildType> ByProjectName(string projectName);
+        BuildType CreateConfiguration(string projectName, string configurationName);
 
         void SetConfigurationSetting(BuildTypeLocator locator, string settingName, string settingValue);
         bool GetConfigurationPauseStatus(BuildTypeLocator locator);
@@ -69,7 +69,7 @@ namespace TeamCitySharp.ActionTypes
         /// </summary>
         /// <param name="locator">Locator for the build type.</param>
         /// <returns>The build type with all its properties.</returns>
-        BuildConfig BuildType(BuildTypeLocator locator);
+        BuildType BuildType(BuildTypeLocator locator);
 
         void DeleteConfiguration(BuildTypeLocator locator);
 

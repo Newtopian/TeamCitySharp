@@ -19,70 +19,70 @@ namespace TeamCitySharp.ActionTypes
             _caller = caller;
         }
 
-        public List<BuildConfig> All()
+        public List<BuildType> All()
         {
             var buildType = _caller.Get<BuildTypeWrapper>("/app/rest/buildTypes");
 
             return buildType.BuildType;
         }
 
-        public BuildConfig ByConfigurationName(string buildConfigName)
+        public BuildType ByConfigurationName(string buildConfigName)
         {
-            var build = _caller.GetFormat<BuildConfig>("/app/rest/buildTypes/name:{0}", buildConfigName);
+            var build = _caller.GetFormat<BuildType>("/app/rest/buildTypes/name:{0}", buildConfigName);
 
             return build;
         }
 
-        public BuildConfig ByConfigurationId(string buildConfigId)
+        public BuildType ByConfigurationId(string buildConfigId)
         {
-            var build = _caller.GetFormat<BuildConfig>("/app/rest/buildTypes/id:{0}", buildConfigId);
+            var build = _caller.GetFormat<BuildType>("/app/rest/buildTypes/id:{0}", buildConfigId);
 
             return build;
         }
 
-        public BuildConfig ByProjectNameAndConfigurationName(string projectName, string buildConfigName)
+        public BuildType ByProjectNameAndConfigurationName(string projectName, string buildConfigName)
         {
-            var build = _caller.Get<BuildConfig>(string.Format("/app/rest/projects/name:{0}/buildTypes/name:{1}", projectName, buildConfigName));
+            var build = _caller.Get<BuildType>(string.Format("/app/rest/projects/name:{0}/buildTypes/name:{1}", projectName, buildConfigName));
             return build;
         }
 
-        public BuildConfig ByProjectNameAndConfigurationId(string projectName, string buildConfigId)
+        public BuildType ByProjectNameAndConfigurationId(string projectName, string buildConfigId)
         {
-            var build = _caller.Get<BuildConfig>(string.Format("/app/rest/projects/name:{0}/buildTypes/id:{1}", projectName, buildConfigId));
+            var build = _caller.Get<BuildType>(string.Format("/app/rest/projects/name:{0}/buildTypes/id:{1}", projectName, buildConfigId));
             return build;
         }
 
-        public BuildConfig ByProjectIdAndConfigurationName(string projectId, string buildConfigName)
+        public BuildType ByProjectIdAndConfigurationName(string projectId, string buildConfigName)
         {
-            var build = _caller.Get<BuildConfig>(string.Format("/app/rest/projects/id:{0}/buildTypes/name:{1}", projectId, buildConfigName));
+            var build = _caller.Get<BuildType>(string.Format("/app/rest/projects/id:{0}/buildTypes/name:{1}", projectId, buildConfigName));
             return build;
         }
 
-        public BuildConfig ByProjectIdAndConfigurationId(string projectId, string buildConfigId)
+        public BuildType ByProjectIdAndConfigurationId(string projectId, string buildConfigId)
         {
-            var build = _caller.Get<BuildConfig>(string.Format("/app/rest/projects/id:{0}/buildTypes/id:{1}", projectId, buildConfigId));
+            var build = _caller.Get<BuildType>(string.Format("/app/rest/projects/id:{0}/buildTypes/id:{1}", projectId, buildConfigId));
             return build;
         }
 
-        public List<BuildConfig> ByProjectId(string projectId)
+        public List<BuildType> ByProjectId(string projectId)
         {
             var buildWrapper = _caller.GetFormat<BuildTypeWrapper>("/app/rest/projects/id:{0}/buildTypes", projectId);
 
-            if (buildWrapper == null || buildWrapper.BuildType == null) return new List<BuildConfig>();
+            if (buildWrapper == null || buildWrapper.BuildType == null) return new List<BuildType>();
             return buildWrapper.BuildType;
         }
 
-        public List<BuildConfig> ByProjectName(string projectName)
+        public List<BuildType> ByProjectName(string projectName)
         {
             var buildWrapper = _caller.GetFormat<BuildTypeWrapper>("/app/rest/projects/name:{0}/buildTypes", projectName);
 
-            if (buildWrapper == null || buildWrapper.BuildType == null) return new List<BuildConfig>();
+            if (buildWrapper == null || buildWrapper.BuildType == null) return new List<BuildType>();
             return buildWrapper.BuildType;
         }
 
-        public BuildConfig CreateConfiguration(string projectName, string configurationName)
+        public BuildType CreateConfiguration(string projectName, string configurationName)
         {
-            return _caller.PostFormat<BuildConfig>(configurationName, HttpContentTypes.TextPlain, HttpContentTypes.ApplicationJson, "/app/rest/projects/name:{0}/buildTypes", projectName);
+            return _caller.PostFormat<BuildType>(configurationName, HttpContentTypes.TextPlain, HttpContentTypes.ApplicationJson, "/app/rest/projects/name:{0}/buildTypes", projectName);
         }
 
         public void SetConfigurationSetting(BuildTypeLocator locator, string settingName, string settingValue)
@@ -106,7 +106,7 @@ namespace TeamCitySharp.ActionTypes
 
         public void PostRawBuildStep(BuildTypeLocator locator, string rawXml)
         {
-            _caller.PostFormat<BuildConfig>(rawXml, HttpContentTypes.ApplicationXml, string.Empty, "/app/rest/buildTypes/{0}/steps", locator);
+            _caller.PostFormat<BuildType>(rawXml, HttpContentTypes.ApplicationXml, string.Empty, "/app/rest/buildTypes/{0}/steps", locator);
         }
 
         public void PostRawBuildTrigger(BuildTypeLocator locator, string rawXml)
@@ -203,9 +203,9 @@ namespace TeamCitySharp.ActionTypes
             _caller.PostFormat(rawXml.OuterXml, HttpContentTypes.ApplicationXml, "/app/rest/buildTypes/{0}/snapshot-dependencies", locator);
         }
 
-        public BuildConfig BuildType(BuildTypeLocator locator)
+        public BuildType BuildType(BuildTypeLocator locator)
         {
-            var build = _caller.GetFormat<BuildConfig>("/app/rest/buildTypes/{0}", locator);
+            var build = _caller.GetFormat<BuildType>("/app/rest/buildTypes/{0}", locator);
 
             return build;
         }

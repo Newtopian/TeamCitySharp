@@ -71,6 +71,7 @@
     <Compile Include="DomainEntities\BuildStatistics.cs" />
     <Compile Include="DomainEntities\Triggered.cs" />
     <Compile Include="Extentions\EnumerablesExtentions.cs" />
+    <Compile Include="ModelingUtils\ReferenceWrapper.cs" />
     <Compile Include="TeamCityClient.cs" />
     <Compile Include="ActionTypes\Users.cs" />
     <Compile Include="ActionTypes\VcsRoots.cs" />
@@ -99,7 +100,7 @@
     <Compile Include="DomainEntities\Agent.cs" />
     <Compile Include="DomainEntities\AgentWrapper.cs" />
     <Compile Include="DomainEntities\Build.cs" />
-    <Compile Include="DomainEntities\BuildConfig.cs" />
+    <Compile Include="DomainEntities\BuildType.cs" />
     <Compile Include="DomainEntities\BuildTypeWrapper.cs" />
     <Compile Include="DomainEntities\BuildWrapper.cs" />
     <Compile Include="DomainEntities\Change.cs" />

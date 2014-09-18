@@ -14,7 +14,6 @@ namespace TeamCitySharp.ActionTypes
         internal Builds(TeamCityCaller caller)
         {
             _caller = caller;
-            
         }
 
         public List<BuildSumary> ByBuildLocator(BuildLocator locator)
@@ -22,6 +21,7 @@ namespace TeamCitySharp.ActionTypes
             var buildWrapper = _caller.GetFormat<BuildWrapper>("/app/rest/builds?locator={0}", locator);
             if (int.Parse(buildWrapper.Count) > 0)
             {
+                buildWrapper.SetCaller(_caller);
                 return buildWrapper.Build;
             }
             return new List<BuildSumary>();
@@ -81,7 +81,7 @@ namespace TeamCitySharp.ActionTypes
                                                                           status: BuildStatus.SUCCESS,
                                                                           maxResults: 1
                                                   ));
-            return builds != null ? builds.FirstOrDefault() : new Build();
+            return builds != null ? builds.FirstOrDefault() : new BuildSumary();
         }
 
         public List<BuildSumary> FailedBuildsByBuildConfigId(string buildConfigId)
@@ -97,7 +97,7 @@ namespace TeamCitySharp.ActionTypes
                                                                           status: BuildStatus.FAILURE,
                                                                           maxResults: 1
                                                   ));
-            return builds != null ? builds.FirstOrDefault() : new Build();
+            return builds != null ? builds.FirstOrDefault() : new BuildSumary();
         }
 
         public BuildSumary LastBuildByBuildConfigId(string buildConfigId)
@@ -105,7 +105,7 @@ namespace TeamCitySharp.ActionTypes
             var builds = ByBuildLocator(BuildLocator.WithDimensions(BuildTypeLocator.WithId(buildConfigId),
                                                                           maxResults: 1
                                                   ));
-            return builds != null ? builds.FirstOrDefault() : new Build();
+            return builds != null ? builds.FirstOrDefault() : new BuildSumary();
         }
 
         public List<BuildSumary> ErrorBuildsByBuildConfigId(string buildConfigId)
@@ -121,7 +121,7 @@ namespace TeamCitySharp.ActionTypes
                                                                           status: BuildStatus.ERROR,
                                                                           maxResults: 1
                                                   ));
-            return builds != null ? builds.FirstOrDefault() : new Build();
+            return builds != null ? builds.FirstOrDefault() : new BuildSumary();
         }
 
         public List<BuildSumary> ByBuildConfigId(string buildConfigId)

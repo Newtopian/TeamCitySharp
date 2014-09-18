@@ -118,26 +118,32 @@ namespace TeamCitySharp.Connection
             return string.Empty;
         }
 
+        public T GetHRef<T>(string urlPart)
+        {
+            var response = GetResponse(urlPart, false);
+            return response.StaticBody<T>();
+        }
+
         public T Get<T>(string urlPart)
         {
             var response = GetResponse(urlPart);
             return response.StaticBody<T>();
         }
-        
+
         public void Get(string urlPart)
         {
             GetResponse(urlPart);
         }
 
-        private HttpResponse GetResponse(string urlPart)
+        private HttpResponse GetResponse(string urlPart, bool needsAuth = true)
         {
-            if (CheckForUserNameAndPassword())
+            if (needsAuth && CheckForUserNameAndPassword())
                 throw new ArgumentException("If you are not acting as a guest you must supply userName and password");
 
             if (string.IsNullOrEmpty(urlPart))
                 throw new ArgumentException("Url must be specfied");
 
-            var url = CreateUrl(urlPart);
+            var url = CreateUrl(urlPart, needsAuth);
 
             var response = CreateHttpClient(_configuration.UserName, _configuration.Password, HttpContentTypes.ApplicationJson).Get(url);
             ThrowIfHttpError(response, url);
@@ -231,15 +237,19 @@ namespace TeamCitySharp.Connection
         /// </summary>
         private static void ThrowIfHttpError(HttpResponse response, string url)
         {
-            if(!IsHttpError(response))
+            if (!IsHttpError(response))
                 return;
             throw new HttpException(response.StatusCode, string.Format("Error: {0}\nHTTP: {3}\nURL: {1}\n{2}", response.StatusDescription, url, response.RawText, response.StatusCode));
         }
 
-        private string CreateUrl(string urlPart)
+        private string CreateUrl(string urlPart, bool needsAuth = true)
         {
             var protocol = _configuration.UseSSL ? "https://" : "http://";
-            var authType = _configuration.ActAsGuest ? "/guestAuth" : "/httpAuth";
+            var authType = "";
+            if (needsAuth)
+            {
+                authType = _configuration.ActAsGuest ? "/guestAuth" : "/httpAuth";
+            }
 
             return string.Format("{0}{1}{2}{3}", protocol, _configuration.HostName, authType, urlPart);
         }
