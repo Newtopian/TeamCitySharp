@@ -188,7 +188,7 @@ namespace TeamCitySharp.IntegrationTests
                 client.Builds.ByBuildLocator(BuildLocator.WithDimensions(BuildTypeLocator.WithId(buildConfigId),
                                                                          maxResults: 1));
             Assert.That(build.Count == 1);
-            Assert.IsNull(build[0].StatusText);
+            Assert.IsNull(build[0].Status);
         }
     }
 }
